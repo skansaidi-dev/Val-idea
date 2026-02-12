@@ -108,15 +108,25 @@
     }
   }
 
+  // Handle both mobile and desktop reliably
+  function handleNoBtn() {
+    moveNoBtn();
+    noBtn.blur(); // remove focus so mobile doesn't "stick"
+  }
+
   // Desktop hover
   noBtn.addEventListener("mouseover", moveNoBtn);
 
   // Mobile touch
   noBtn.addEventListener("touchstart", (e) => {
-    e.preventDefault(); // Prevent simulated mouse events
-    moveNoBtn();
+    e.preventDefault();
+    handleNoBtn();
   });
 
+  // Click fallback for mobile
+  noBtn.addEventListener("click", handleNoBtn);
+
+  // Yes button click
   yesBtn.addEventListener("click", () => {
     document.body.innerHTML = `
       <h1>She said YESSSS 🥰💖 (hmdl 3lik) </h1>
